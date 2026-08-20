@@ -1,0 +1,24 @@
+# Build artifacts
+build/
+*.o
+*.gcda
+*.gcno
+*.gcov
+
+# Coverage reports
+coverage/
+*.info
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Compiled binary
+compattor
