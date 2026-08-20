@@ -34,7 +34,7 @@ jobs:
             --txt
 
       - name: Report branch coverage
-        run: gcovr --root . --filter src/ --branches --txt
+        run: gcovr --root . --filter src/ --txt-metric branch
 
       - name: Upload coverage report
         if: always()
