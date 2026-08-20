@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop, main]
+
+jobs:
+  build-test-coverage:
+    name: Build, test and coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++ libpng-dev libgtest-dev pkg-config make
+
+      - name: Install gcovr
+        run: pipx install gcovr
+
+      - name: Build and run tests
+        run: make test
+
+      - name: Enforce coverage thresholds
+        run: |
+          gcovr --root . --filter src/ \
+            --fail-under-line 80 \
+            --xml coverage.xml \
+            --html-details coverage.html \
+            --txt
+
+      - name: Report branch coverage
+        run: gcovr --root . --filter src/ --branches --txt
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-report
+          path: |
+            coverage.xml
+            coverage*.html

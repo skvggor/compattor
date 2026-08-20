@@ -1,5 +1,7 @@
 # compattor
 
+[![CI](https://github.com/skvggor/compattor/actions/workflows/ci.yml/badge.svg?branch=develop)](https://github.com/skvggor/compattor/actions/workflows/ci.yml)
+
 PNG compression tool written in C++ using libpng. Uses median-cut color quantization to achieve high compression, and exhaustive filter/strategy search for lossless mode.
 
 ## Dependencies
